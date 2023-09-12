@@ -38,3 +38,21 @@ def normalize(df, target_sum=1):
     ndf = pd.DataFrame(Xnorm, columns=columns, index=index)
     return ndf
 
+
+def makeColorbar(cmap, width, hieght, title, orientation, tickLabels):
+    a = np.array([[0,1]])
+    plt.figure(figsize=(width, hieght))
+    img = plt.imshow(a, cmap=cmap)
+    plt.gca().set_visible(False)
+    cax = plt.axes([0.1, 0.2, 0.8, 0.6])
+    ticks = np.linspace(0,1 , len(tickLabels))
+    cbar = plt.colorbar(orientation=orientation, 
+                        cax=cax, 
+                        label=title,
+                        ticks=ticks)
+
+    if orientation == 'vertical':
+        cbar.ax.set_yticklabels(tickLabels)
+    else:
+        cbar.ax.set_xticklabels(tickLabels)
+
